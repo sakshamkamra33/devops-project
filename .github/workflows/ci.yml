@@ -24,7 +24,3 @@ jobs:
     - name: Run tests
       run: |
         pytest
-
-    - name: Build Docker image
-      run: |
-        docker build -t devops-app .
