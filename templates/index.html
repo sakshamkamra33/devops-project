@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DevOps Project</title>
+</head>
+<body style="text-align:center; font-family: Arial;">
+
+    <h1>🚀 DevOps Project Running</h1>
+    <p>This project uses CI/CD + Docker + GitHub Actions</p>
+
+    <h2>Status</h2>
+    <p id="status">Loading...</p>
+
+    <script>
+        fetch('/api/status')
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById('status').innerText =
+                "Status: " + data.status + " | Version: " + data.version;
+        });
+    </script>
+
+</body>
+</html>
