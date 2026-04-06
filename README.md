@@ -78,3 +78,21 @@ cd devops-project
 pip install -r requirements.txt
 python app.py
 ```
+🐳 Docker Run
+```
+docker build -t devops-project .
+docker run -p 5000:5000 devops-project
+```
+---
+📸 Output
+CI/CD Pipeline: ✅ Passing
+Deployment: ✅ Live
+Status: Running
+---
+💡 Key Highlights
+
+✔ End-to-end DevOps pipeline
+✔ Automated testing & deployment
+✔ Real-world project setup
+✔ Production-ready structure
+---
