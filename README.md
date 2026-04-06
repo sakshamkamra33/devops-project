@@ -45,3 +45,15 @@ This project demonstrates a complete **DevOps pipeline** using:
 
 ## 📂 Project Structure
 
+```
+devops-project/
+│── app.py
+│── requirements.txt
+│── Dockerfile
+│── templates/
+│ └── index.html
+│── tests/
+│ └── test_app.py
+│── .github/workflows/
+│ └── ci.yml
+```
