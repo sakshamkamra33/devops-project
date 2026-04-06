@@ -57,3 +57,24 @@ devops-project/
 │── .github/workflows/
 │ └── ci.yml
 ```
+
+---
+
+## 🧪 API Endpoints
+
+| Endpoint | Description |
+|--------|-------------|
+| `/` | UI Page |
+| `/status` | App Status |
+| `/about` | Project Info |
+
+---
+
+## ▶️ Run Locally
+
+```bash
+git clone https://github.com/sakshamkamra33/devops-project.git
+cd devops-project
+pip install -r requirements.txt
+python app.py
+```
