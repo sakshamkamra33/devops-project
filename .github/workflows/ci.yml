@@ -24,3 +24,11 @@ jobs:
     - name: Run tests
       run: |
         pytest
+
+    # ✅ Proper Docker setup
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Build Docker image
+      run: |
+        docker build -t devops-app .
