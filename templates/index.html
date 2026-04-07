@@ -3,63 +3,65 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevOps Dashboard</title>
+<title>DevOps Final Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <style>
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    display: flex;
-    background: #0f172a;
-    color: white;
-}
-
-/* Sidebar */
-.sidebar {
-    width: 240px;
     background: #020617;
-    padding: 20px;
-    height: 100vh;
-}
-
-.sidebar h2 {
-    margin-bottom: 40px;
-}
-
-.sidebar a {
-    display: block;
-    margin: 15px 0;
-    color: #94a3b8;
-    text-decoration: none;
-}
-
-.sidebar a:hover {
     color: white;
 }
 
-/* Main */
-.main {
-    flex: 1;
-    padding: 20px 30px;
-}
-
-/* Navbar */
-.navbar {
+/* LOGIN SCREEN */
+#login {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
-.badge {
+.login-box {
+    background: #1e293b;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+}
+
+input {
+    padding: 10px;
+    margin: 10px;
+    width: 200px;
+}
+
+button {
+    padding: 10px 20px;
     background: #22c55e;
-    padding: 5px 10px;
-    border-radius: 10px;
-    color: black;
+    border: none;
+    cursor: pointer;
 }
 
-/* Cards */
+/* DASHBOARD */
+#dashboard {
+    display: none;
+}
+
+.sidebar {
+    width: 220px;
+    background: #020617;
+    height: 100vh;
+    position: fixed;
+    padding: 20px;
+}
+
+.main {
+    margin-left: 240px;
+    padding: 20px;
+}
+
 .cards {
     display: flex;
     gap: 20px;
@@ -69,139 +71,118 @@ body {
 .card {
     background: #1e293b;
     padding: 20px;
-    border-radius: 12px;
+    border-radius: 10px;
     width: 200px;
 }
 
-/* Status dot */
-.status-dot {
-    height: 10px;
-    width: 10px;
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 8px;
-}
-
-.running {
-    background: #22c55e;
-    box-shadow: 0 0 8px #22c55e;
-}
-
-/* Logs */
-.logs {
+.chart, .logs, .timeline {
     margin-top: 30px;
-    background: #020617;
+    background: #1e293b;
     padding: 20px;
-    border-radius: 12px;
-    font-family: monospace;
-    height: 200px;
+    border-radius: 10px;
+}
+
+.logs {
+    height: 150px;
     overflow-y: auto;
-    font-size: 13px;
+    font-family: monospace;
 }
 </style>
 </head>
 
 <body>
 
-<!-- Sidebar -->
-<div class="sidebar">
-    <h2>🚀 DevOps</h2>
-    <a href="#">Dashboard</a>
-    <a href="#">Deployments</a>
-    <a href="#">Logs</a>
-    <a href="#">Settings</a>
+<!-- LOGIN -->
+<div id="login">
+    <div class="login-box">
+        <h2>🔐 DevOps Login</h2>
+        <input placeholder="Username"><br>
+        <input type="password" placeholder="Password"><br>
+        <button onclick="enter()">Login</button>
+    </div>
 </div>
 
-<!-- Main -->
+<!-- DASHBOARD -->
+<div id="dashboard">
+
+<div class="sidebar">
+    <h2>🚀 DevOps</h2>
+    <p>Dashboard</p>
+    <p>Deployments</p>
+    <p>Metrics</p>
+    <p>Logs</p>
+</div>
+
 <div class="main">
 
-    <!-- Navbar -->
-    <div class="navbar">
-        <h2>Production Dashboard</h2>
-        <div class="badge">LIVE</div>
-    </div>
+<h2>Final DevOps Dashboard</h2>
 
-    <!-- Cards -->
-    <div class="cards">
-        <div class="card">
-            <h4>Status</h4>
-            <p><span id="dot" class="status-dot"></span><span id="status">Loading...</span></p>
-        </div>
+<div class="cards">
+    <div class="card"><h4>Status</h4><p id="status"></p></div>
+    <div class="card"><h4>Version</h4><p id="version"></p></div>
+    <div class="card"><h4>Uptime</h4><p>99.99%</p></div>
+    <div class="card"><h4>Env</h4><p>Production</p></div>
+</div>
 
-        <div class="card">
-            <h4>Version</h4>
-            <p id="version">--</p>
-        </div>
+<div class="chart">
+    <h3>API Metrics</h3>
+    <canvas id="chart"></canvas>
+</div>
 
-        <div class="card">
-            <h4>Uptime</h4>
-            <p>99.98%</p>
-        </div>
+<div class="timeline">
+    <h3>Deployment Timeline</h3>
+    <p>✔ Code pushed</p>
+    <p>✔ Tests passed</p>
+    <p>✔ Docker built</p>
+    <p>✔ Deployed on Render</p>
+</div>
 
-        <div class="card">
-            <h4>Environment</h4>
-            <p>Production</p>
-        </div>
-    </div>
+<div class="logs" id="logs"></div>
 
-    <!-- About -->
-    <div style="margin-top:30px;">
-        <h3>About</h3>
-        <p id="about">Loading...</p>
-    </div>
-
-    <!-- Logs -->
-    <div class="logs" id="logs">
-        Initializing logs...
-    </div>
-
+</div>
 </div>
 
 <script>
+function enter() {
+    document.getElementById("login").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
+    loadData();
+    generateLogs();
+}
+
+/* Load API */
 async function loadData() {
     const res = await fetch('/status');
     const data = await res.json();
-
     document.getElementById('status').innerText = data.status;
     document.getElementById('version').innerText = data.version;
-
-    const dot = document.getElementById('dot');
-    if (data.status.toLowerCase() === "running") {
-        dot.classList.add("running");
-    }
-
-    const aboutRes = await fetch('/about');
-    const aboutData = await aboutRes.json();
-    document.getElementById('about').innerText = aboutData.message;
 }
 
-/* Fake logs (for realism) */
+/* Chart */
+new Chart(document.getElementById('chart'), {
+    type: 'line',
+    data: {
+        labels: ["1","2","3","4","5"],
+        datasets: [{
+            data: [100, 80, 120, 90, 70],
+            borderColor: "#22c55e"
+        }]
+    }
+});
+
+/* Logs */
 function generateLogs() {
     const logs = document.getElementById("logs");
-
-    const messages = [
-        "🚀 Deploy started...",
-        "📦 Building Docker image...",
-        "✅ Tests passed",
-        "📡 Pushing to registry...",
-        "🌍 Deploying to Render...",
-        "✅ Service is live",
-        "📊 Monitoring active..."
-    ];
-
+    const msgs = ["Deploying...", "Running tests...", "Building Docker...", "Live!"];
     let i = 0;
 
     setInterval(() => {
-        if (i < messages.length) {
-            logs.innerHTML += "<br>" + messages[i];
-            logs.scrollTop = logs.scrollHeight;
+        if (i < msgs.length) {
+            logs.innerHTML += "<br>" + msgs[i];
             i++;
         }
-    }, 1500);
+    }, 1000);
 }
-
-loadData();
-generateLogs();
 </script>
 
 </body>
