@@ -11,163 +11,154 @@
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
-    background: linear-gradient(270deg, #0f172a, #1e293b, #0f172a);
-    background-size: 400% 400%;
-    animation: gradientBG 10s ease infinite;
+    display: flex;
+    background: #0f172a;
     color: white;
 }
 
-@keyframes gradientBG {
-    0% {background-position: 0% 50%;}
-    50% {background-position: 100% 50%;}
-    100% {background-position: 0% 50%;}
+/* Sidebar */
+.sidebar {
+    width: 220px;
+    height: 100vh;
+    background: #020617;
+    padding: 20px;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(10px);
-}
-
-.logo {
-    font-weight: 700;
-    font-size: 20px;
-}
-
-.container {
-    text-align: center;
-    margin-top: 60px;
-}
-
-h1 {
-    font-size: 42px;
-}
-
-.subtitle {
-    color: #94a3b8;
+.sidebar h2 {
     margin-bottom: 40px;
 }
 
+.sidebar a {
+    display: block;
+    color: #94a3b8;
+    text-decoration: none;
+    margin: 15px 0;
+}
+
+.sidebar a:hover {
+    color: white;
+}
+
+/* Main */
+.main {
+    flex: 1;
+    padding: 30px;
+}
+
+.header {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* Cards */
 .cards {
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    gap: 20px;
     flex-wrap: wrap;
 }
 
 .card {
-    background: rgba(255,255,255,0.05);
-    backdrop-filter: blur(15px);
-    padding: 30px;
-    width: 280px;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-    transition: 0.3s;
+    background: #1e293b;
+    padding: 20px;
+    border-radius: 15px;
+    width: 220px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
 }
 
-.card:hover {
-    transform: translateY(-10px);
+.card h3 {
+    margin-bottom: 10px;
 }
 
-.status-badge {
-    padding: 8px 15px;
-    border-radius: 20px;
+/* Status dot */
+.status-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
     display: inline-block;
-    margin-top: 10px;
-    font-weight: bold;
+    margin-right: 8px;
 }
 
 .running {
     background: #22c55e;
-    color: black;
+    box-shadow: 0 0 10px #22c55e;
 }
 
-.down {
-    background: red;
-}
-
-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    border-radius: 10px;
-    border: none;
-    background: #22c55e;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    background: #16a34a;
-}
-
-.footer {
-    margin-top: 60px;
-    padding: 20px;
-    text-align: center;
-    color: #94a3b8;
+/* Big section */
+.section {
+    margin-top: 30px;
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 15px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="navbar">
-    <div class="logo">🚀 DevOps Dashboard</div>
-    <div>CI/CD Pipeline</div>
+<div class="sidebar">
+    <h2>🚀 DevOps</h2>
+    <a href="#">Dashboard</a>
+    <a href="#">Status</a>
+    <a href="#">Logs</a>
+    <a href="#">Settings</a>
 </div>
 
-<div class="container">
-    <h1>Production Monitoring</h1>
-    <p class="subtitle">Live Deployment Status & API Health</p>
+<div class="main">
+
+    <div class="header">Production Dashboard</div>
 
     <div class="cards">
-
         <div class="card">
-            <h2>Status</h2>
-            <div id="badge" class="status-badge">Checking...</div>
-            <p id="version"></p>
-            <button onclick="loadStatus()">Refresh</button>
+            <h3>Status</h3>
+            <p>
+                <span id="dot" class="status-dot"></span>
+                <span id="status">Loading...</span>
+            </p>
         </div>
 
         <div class="card">
-            <h2>About</h2>
-            <p id="about">Loading...</p>
+            <h3>Version</h3>
+            <p id="version">Loading...</p>
         </div>
 
+        <div class="card">
+            <h3>Uptime</h3>
+            <p>99.9%</p>
+        </div>
+
+        <div class="card">
+            <h3>Environment</h3>
+            <p>Production</p>
+        </div>
     </div>
-</div>
 
-<div class="footer">
-    Built with ❤️ using Flask, Docker & CI/CD
+    <div class="section">
+        <h3>About Project</h3>
+        <p id="about">Loading...</p>
+    </div>
+
 </div>
 
 <script>
-async function loadStatus() {
+async function loadData() {
     const res = await fetch('/status');
     const data = await res.json();
 
-    const badge = document.getElementById('badge');
-    badge.innerText = data.status;
+    document.getElementById('status').innerText = data.status;
+    document.getElementById('version').innerText = data.version;
+
+    const dot = document.getElementById('dot');
 
     if (data.status.toLowerCase() === "running") {
-        badge.className = "status-badge running";
-    } else {
-        badge.className = "status-badge down";
+        dot.classList.add("running");
     }
 
-    document.getElementById('version').innerText = "Version: " + data.version;
+    const aboutRes = await fetch('/about');
+    const aboutData = await aboutRes.json();
+    document.getElementById('about').innerText = aboutData.message;
 }
 
-async function loadAbout() {
-    const res = await fetch('/about');
-    const data = await res.json();
-    document.getElementById('about').innerText = data.message;
-}
-
-loadStatus();
-loadAbout();
+loadData();
 </script>
 
 </body>
