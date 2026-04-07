@@ -1,317 +1,348 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>DevOps Ultra Dashboard</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevOps Ultra Dashboard</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<style>
-body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #020617, #0f172a);
-    color: white;
-}
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #020617, #0f172a);
+            color: white;
+        }
 
-/* LOGIN */
-#login {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-}
+        /* LOGIN */
+        #login {
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
 
-.login-box {
-    background: #1e293b;
-    padding: 30px;
-    border-radius: 12px;
-    text-align: center;
-}
+        .login-box {
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 12px;
+            text-align: center;
+        }
 
-input {
-    padding: 10px;
-    margin: 10px;
-    width: 200px;
-    border-radius: 6px;
-    border: none;
-}
+        input {
+            padding: 10px;
+            margin: 10px;
+            width: 200px;
+            border-radius: 6px;
+            border: none;
+        }
 
-button {
-    padding: 10px 20px;
-    background: #22c55e;
-    border: none;
-    cursor: pointer;
-    border-radius: 6px;
-    color: white;
-}
+        button {
+            padding: 10px 20px;
+            background: #22c55e;
+            border: none;
+            cursor: pointer;
+            border-radius: 6px;
+            color: white;
+        }
 
-/* DASHBOARD */
-#dashboard {
-    display: none;
-}
+        /* DASHBOARD */
+        #dashboard {
+            display: none;
+        }
 
-.sidebar {
-    width: 220px;
-    background: #020617;
-    height: 100vh;
-    position: fixed;
-    padding: 20px;
-}
+        .sidebar {
+            width: 220px;
+            background: #020617;
+            height: 100vh;
+            position: fixed;
+            padding: 20px;
+        }
 
-.main {
-    margin-left: 240px;
-    padding: 20px;
-}
+        .main {
+            margin-left: 240px;
+            padding: 20px;
+        }
 
-.cards {
-    display: flex;
-    gap: 20px;
-    flex-wrap: wrap;
-}
+        .cards {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
 
-.card {
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-    width: 200px;
-    box-shadow: 0 0 15px rgba(34,197,94,0.2);
-}
+        .card {
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 200px;
+            box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+        }
 
-.chart, .logs, .timeline {
-    margin-top: 30px;
-    background: #1e293b;
-    padding: 20px;
-    border-radius: 10px;
-}
+        .chart,
+        .logs,
+        .timeline {
+            margin-top: 30px;
+            background: #1e293b;
+            padding: 20px;
+            border-radius: 10px;
+        }
 
-.logs {
-    height: 150px;
-    overflow-y: auto;
-    font-family: monospace;
-}
+        .logs {
+            height: 150px;
+            overflow-y: auto;
+            font-family: monospace;
+        }
 
-/* ALERT */
-#alertBox {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: red;
-    padding: 10px;
-    border-radius: 6px;
-    display: none;
-}
-</style>
+        /* ALERT */
+        #alertBox {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: red;
+            padding: 10px;
+            border-radius: 6px;
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- LOGIN -->
-<div id="login">
-    <div class="login-box">
-        <h2>🔐 DevOps Login</h2>
-        <input id="username" placeholder="Username"><br>
-        <input id="password" type="password" placeholder="Password"><br>
-        <button onclick="enter()">Login</button>
+    <!-- LOGIN -->
+    <div id="login">
+        <div class="login-box">
+            <h2>🔐 DevOps Login</h2>
+            <input id="username" placeholder="Username"><br>
+            <input id="password" type="password" placeholder="Password"><br>
+            <button onclick="enter()">Login</button>
+            
+            <p style="margin-top:10px; font-size:14px; color:#94a3b8;">
+                Demo Login:<br>
+                Username: <b>admin</b><br>
+                Password: <b>123</b>
+            </p>
+        </div>
     </div>
-</div>
 
-<!-- DASHBOARD -->
-<div id="dashboard">
+    <!-- DASHBOARD -->
+    <div id="dashboard">
 
-<div class="sidebar">
-    <h2>🚀 DevOps</h2>
-    <p>Dashboard</p>
-    <p>Deployments</p>
-    <p>Metrics</p>
-    <p>Logs</p>
-</div>
+        <div class="sidebar">
+            <h2>🚀 DevOps</h2>
+            <p>Dashboard</p>
+            <p>Deployments</p>
+            <p>Metrics</p>
+            <p>Logs</p>
+        </div>
 
-<div class="main">
+        <div class="main">
 
-<h2>Ultra DevOps Dashboard</h2>
+            <h2>Ultra DevOps Dashboard</h2>
 
-<!-- MAIN CARDS -->
-<div class="cards">
-    <div class="card"><h4>Status</h4><p id="status">--</p></div>
-    <div class="card"><h4>Version</h4><p id="version">--</p></div>
-    <div class="card"><h4>Uptime</h4><p>99.99%</p></div>
-    <div class="card"><h4>Env</h4><p>Production</p></div>
-</div>
+            <!-- MAIN CARDS -->
+            <div class="cards">
+                <div class="card">
+                    <h4>Status</h4>
+                    <p id="status">--</p>
+                </div>
+                <div class="card">
+                    <h4>Version</h4>
+                    <p id="version">--</p>
+                </div>
+                <div class="card">
+                    <h4>Uptime</h4>
+                    <p>99.99%</p>
+                </div>
+                <div class="card">
+                    <h4>Env</h4>
+                    <p>Production</p>
+                </div>
+            </div>
 
-<!-- SYSTEM CARDS -->
-<div class="cards">
-    <div class="card"><h4>CPU Usage</h4><p id="cpu">--%</p></div>
-    <div class="card"><h4>Memory Usage</h4><p id="memory">--%</p></div>
-    <div class="card"><h4>CI/CD</h4><p id="cicd">Checking...</p></div>
-</div>
+            <!-- SYSTEM CARDS -->
+            <div class="cards">
+                <div class="card">
+                    <h4>CPU Usage</h4>
+                    <p id="cpu">--%</p>
+                </div>
+                <div class="card">
+                    <h4>Memory Usage</h4>
+                    <p id="memory">--%</p>
+                </div>
+                <div class="card">
+                    <h4>CI/CD</h4>
+                    <p id="cicd">Checking...</p>
+                </div>
+            </div>
 
-<!-- CHART -->
-<div class="chart">
-    <h3>Live API Metrics</h3>
-    <canvas id="chart"></canvas>
-</div>
+            <!-- CHART -->
+            <div class="chart">
+                <h3>Live API Metrics</h3>
+                <canvas id="chart"></canvas>
+            </div>
 
-<!-- TIMELINE -->
-<div class="timeline">
-    <h3>Deployment Timeline</h3>
-    <p>✔ Code pushed</p>
-    <p>✔ Tests passed</p>
-    <p>✔ Docker built</p>
-    <p>✔ Deployed</p>
-</div>
+            <!-- TIMELINE -->
+            <div class="timeline">
+                <h3>Deployment Timeline</h3>
+                <p>✔ Code pushed</p>
+                <p>✔ Tests passed</p>
+                <p>✔ Docker built</p>
+                <p>✔ Deployed</p>
+            </div>
 
-<!-- LOGS -->
-<div class="logs" id="logs"></div>
+            <!-- LOGS -->
+            <div class="logs" id="logs"></div>
 
-</div>
-</div>
+        </div>
+    </div>
 
-<!-- ALERT -->
-<div id="alertBox">⚠️ High CPU Usage!</div>
+    <!-- ALERT -->
+    <div id="alertBox">⚠️ High CPU Usage!</div>
 
-<script>
+    <script>
 
-/* LOGIN */
-async function enter() {
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
+        /* LOGIN */
+        async function enter() {
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
 
-    const res = await fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username, password })
-    });
+            const res = await fetch('/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ username, password })
+            });
 
-    const data = await res.json();
+            const data = await res.json();
 
-    if (data.token) {
-        localStorage.setItem("token", data.token);
+            if (data.token) {
+                localStorage.setItem("token", data.token);
 
-        document.getElementById("login").style.display = "none";
-        document.getElementById("dashboard").style.display = "block";
+                document.getElementById("login").style.display = "none";
+                document.getElementById("dashboard").style.display = "block";
 
-        loadData();
-        startAutoRefresh();
-        generateLogs();
-        simulateSystem();
-    } else {
-        alert("Invalid credentials");
-    }
-}
-
-/* LOAD STATUS */
-async function loadData() {
-    const token = localStorage.getItem("token");
-
-    const res = await fetch('/status', {
-        headers: { 'x-access-token': token }
-    });
-
-    const data = await res.json();
-
-    if (data.status === "Running") {
-        document.getElementById("status").innerHTML = "🟢 Running";
-    } else {
-        document.getElementById("status").innerHTML = "🔴 Down";
-    }
-
-    document.getElementById("version").innerText = data.version;
-}
-
-/* AUTO REFRESH */
-function startAutoRefresh() {
-    setInterval(loadData, 5000);
-}
-
-/* CHART */
-let chart;
-
-function createChart() {
-    chart = new Chart(document.getElementById('chart'), {
-        type: 'line',
-        data: {
-            labels: [],
-            datasets: [{
-                label: "Response Time (ms)",
-                data: [],
-                borderColor: "#22c55e",
-                backgroundColor: "rgba(34,197,94,0.2)",
-                fill: true
-            }]
+                loadData();
+                startAutoRefresh();
+                generateLogs();
+                simulateSystem();
+            } else {
+                alert("Invalid credentials");
+            }
         }
-    });
-}
 
-function updateChart() {
-    const time = new Date().toLocaleTimeString();
-    const value = Math.floor(Math.random() * 50) + 70;
+        /* LOAD STATUS */
+        async function loadData() {
+            const token = localStorage.getItem("token");
 
-    chart.data.labels.push(time);
-    chart.data.datasets[0].data.push(value);
+            const res = await fetch('/status', {
+                headers: { 'x-access-token': token }
+            });
 
-    if (chart.data.labels.length > 10) {
-        chart.data.labels.shift();
-        chart.data.datasets[0].data.shift();
-    }
+            const data = await res.json();
 
-    chart.update();
-}
+            if (data.status === "Running") {
+                document.getElementById("status").innerHTML = "🟢 Running";
+            } else {
+                document.getElementById("status").innerHTML = "🔴 Down";
+            }
 
-/* SYSTEM SIMULATION */
-function simulateSystem() {
-    setInterval(() => {
-        const cpu = Math.floor(Math.random() * 100);
-        const memory = Math.floor(Math.random() * 100);
-
-        document.getElementById("cpu").innerText = cpu + "%";
-        document.getElementById("memory").innerText = memory + "%";
-
-        updateChart();
-
-        if (cpu > 85) showAlert();
-
-        document.getElementById("cicd").innerText = "✅ Passing";
-    }, 3000);
-}
-
-/* ALERT */
-function showAlert() {
-    const box = document.getElementById("alertBox");
-    box.style.display = "block";
-
-    setTimeout(() => {
-        box.style.display = "none";
-    }, 3000);
-}
-
-/* LOGS */
-function generateLogs() {
-    const logs = document.getElementById("logs");
-    const msgs = [
-        "🚀 Deploy started...",
-        "🧪 Running tests...",
-        "🐳 Docker build success",
-        "☁️ Deployment complete"
-    ];
-
-    let i = 0;
-
-    setInterval(() => {
-        if (i < msgs.length) {
-            logs.innerHTML += "<br>" + msgs[i];
-            logs.scrollTop = logs.scrollHeight;
-            i++;
+            document.getElementById("version").innerText = data.version;
         }
-    }, 1500);
-}
 
-/* INIT */
-createChart();
+        /* AUTO REFRESH */
+        function startAutoRefresh() {
+            setInterval(loadData, 5000);
+        }
 
-</script>
+        /* CHART */
+        let chart;
+
+        function createChart() {
+            chart = new Chart(document.getElementById('chart'), {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: "Response Time (ms)",
+                        data: [],
+                        borderColor: "#22c55e",
+                        backgroundColor: "rgba(34,197,94,0.2)",
+                        fill: true
+                    }]
+                }
+            });
+        }
+
+        function updateChart() {
+            const time = new Date().toLocaleTimeString();
+            const value = Math.floor(Math.random() * 50) + 70;
+
+            chart.data.labels.push(time);
+            chart.data.datasets[0].data.push(value);
+
+            if (chart.data.labels.length > 10) {
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+            }
+
+            chart.update();
+        }
+
+        /* SYSTEM SIMULATION */
+        function simulateSystem() {
+            setInterval(() => {
+                const cpu = Math.floor(Math.random() * 100);
+                const memory = Math.floor(Math.random() * 100);
+
+                document.getElementById("cpu").innerText = cpu + "%";
+                document.getElementById("memory").innerText = memory + "%";
+
+                updateChart();
+
+                if (cpu > 85) showAlert();
+
+                document.getElementById("cicd").innerText = "✅ Passing";
+            }, 3000);
+        }
+
+        /* ALERT */
+        function showAlert() {
+            const box = document.getElementById("alertBox");
+            box.style.display = "block";
+
+            setTimeout(() => {
+                box.style.display = "none";
+            }, 3000);
+        }
+
+        /* LOGS */
+        function generateLogs() {
+            const logs = document.getElementById("logs");
+            const msgs = [
+                "🚀 Deploy started...",
+                "🧪 Running tests...",
+                "🐳 Docker build success",
+                "☁️ Deployment complete"
+            ];
+
+            let i = 0;
+
+            setInterval(() => {
+                if (i < msgs.length) {
+                    logs.innerHTML += "<br>" + msgs[i];
+                    logs.scrollTop = logs.scrollHeight;
+                    i++;
+                }
+            }, 1500);
+        }
+
+        /* INIT */
+        createChart();
+
+    </script>
 
 </body>
+
 </html>
