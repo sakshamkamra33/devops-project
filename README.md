@@ -118,6 +118,10 @@ docker run -p 5000:5000 devops-dashboard
 
   ---
 
+📸 Preview
+
+
+
 👨‍💻 Author
 
 - Saksham Kamra
