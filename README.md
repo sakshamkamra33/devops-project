@@ -10,8 +10,20 @@
 ## 🌍 Live Demo
 👉 https://devops-project-1nhi.onrender.com
 
+---
+
+## 🔐 Demo Login Credentials
+
+Use the following credentials to access the dashboard:
+
+- Username: `admin`
+- Password: `123`
+
+> ⚠️ This is a demo project. Authentication is for demonstration purposes only.
 
 ---
+
+
 
 ## 📌 Overview  
 
