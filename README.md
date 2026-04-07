@@ -1,6 +1,11 @@
-# 🚀 DevOps CI/CD Flask Project
+# 🚀 DevOps CI/CD Monitoring Dashboard
 
-[![CI/CD](https://github.com/sakshamkamra33/devops-project/actions/workflows/ci.yml/badge.svg)]
+🚀 A production-style DevOps dashboard with CI/CD, monitoring, and deployment pipeline
+
+![CI](https://github.com/sakshamkamra33/devops-project/actions/workflows/ci.yml/badge.svg)
+
+---
+
 
 ## 🌍 Live Demo
 👉 https://devops-project-1nhi.onrender.com
@@ -8,41 +13,51 @@
 
 ---
 
-## 📌 Overview
+## 📌 Overview  
 
-This project demonstrates a complete **DevOps pipeline** using:
+This project demonstrates a **production-style DevOps pipeline** with a **real-time monitoring dashboard**.
 
-- Flask Web Application
-- GitHub Actions (CI/CD)
-- Docker Containerization
-- Automated Testing (Pytest)
-- Cloud Deployment (Render)
+It simulates how modern applications are built, tested, containerized, and deployed automatically using CI/CD practices.
 
 ---
 
-## ⚙️ Tech Stack
+## ⚡ Key Features  
 
-- 🐍 Python (Flask)
-- ⚙️ GitHub Actions
-- 🐳 Docker
-- 🧪 Pytest
-- ☁️ Render (Deployment)
-
----
-
-## 🔁 CI/CD Pipeline
-
-1. Code pushed to GitHub
-2. GitHub Actions triggered
-3. Tests executed using Pytest
-4. Docker image built
-5. Image pushed to Docker Hub
-6. Application deployed on Render
+- 🔄 Automated CI/CD Pipeline using GitHub Actions  
+- 🐳 Dockerized Application for consistent deployment  
+- ☁️ Cloud Deployment on Render  
+- 📊 Interactive DevOps Dashboard UI  
+- 🔐 Authentication System (JWT-based login)  
+- 📈 API Monitoring & Metrics Visualization  
+- 📜 Deployment Timeline Tracking  
+- 🧪 Automated Testing with Pytest  
 
 ---
 
-## 📂 Project Structure
+## 🛠️ Tech Stack  
 
+- 🐍 Python (Flask)  
+- ⚙️ GitHub Actions  
+- 🐳 Docker  
+- 🧪 Pytest  
+- ☁️ Render  
+- 📊 Chart.js  
+- 🔐 JWT Authentication  
+
+---
+
+## 🔁 CI/CD Pipeline Flow  
+
+1. Code pushed to GitHub  
+2. GitHub Actions triggered  
+3. Automated tests executed (Pytest)  
+4. Docker image built  
+5. Application deployed to Render  
+6. Live dashboard updated  
+
+---
+
+## 📂 Project Structure  
 ```
 devops-project/
 │── app.py
@@ -62,9 +77,10 @@ devops-project/
 
 | Endpoint | Description |
 |--------|-------------|
-| `/` | UI Page |
-| `/status` | App Status |
-| `/about` | Project Info |
+| `/` | Dashboard UI |
+| `/status` | App status & version |
+| `/about` | Project details |
+| `/login` | Authentication (JWT) |
 
 ---
 
