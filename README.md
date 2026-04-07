@@ -105,6 +105,7 @@ docker run -p 5000:5000 devops-dashboard
 - API metrics visualization
 - Deployment timeline
 - Logs simulation
+  
 ---
 💡 What Makes This Project Special
 - End-to-end DevOps lifecycle implementation
@@ -122,4 +123,4 @@ docker run -p 5000:5000 devops-dashboard
 
 ⭐ If you like this project
 
-Give it a ⭐ on GitHub!
+- Give it a ⭐ on GitHub!
