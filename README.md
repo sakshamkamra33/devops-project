@@ -92,6 +92,9 @@ cd devops-project
 pip install -r requirements.txt
 python app.py
 ```
+
+---
+
 🐳 Run with Docker
 ```
 docker build -t devops-dashboard .
