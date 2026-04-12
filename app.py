@@ -82,7 +82,7 @@ def login():
 @app.route('/status')
 @token_required
 def status():
-    return jsonify(status="Running", version="2.0.0")
+    return jsonify(status="Running", version="2.0.1")
 
 
 @app.route('/logs')
